@@ -1,30 +1,17 @@
 from fastapi import FastAPI, HTTPException, Query, Path, Depends
 from models import MusicForm, Music, Genre, MusicUpdate
-from contextlib import asynccontextmanager
-from db import create_db_and_tables, get_session
 from sqlmodel import Session, select
 from exceptions.notfound import NotFoundException
+from config.database import create_db_and_tables, get_session
+# from contextlib import asynccontextmanager
 
 #https://fastapi.tiangolo.com/advanced/events/?h=life#lifespan
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    create_db_and_tables()
-    yield
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     create_db_and_tables()
+#     yield
 
-app = FastAPI(lifespan=lifespan)
-
-music_list = [
-    Music(id=0, name="Butter", artist="BTS", genre=Genre.K_POP),
-    Music(id=1, name="Seven", artist="Jungkook feat. Latto", genre=Genre.K_POP),
-    Music(id=2, name="As It Was", artist="Harry Styles", genre=Genre.POP),
-    Music(id=3, name="Blinding Lights", artist="The Weeknd", genre=Genre.POP),
-    Music(id=4, name="Levitating", artist="Dua Lipa", genre=Genre.POP),
-    Music(id=5, name="On The Ground", artist="Rosé", genre=Genre.K_POP),
-    Music(id=6, name="Stay", artist="The Kid LAROI & Justin Bieber", genre=Genre.POP),
-    Music(id=7, name="Starlight", artist="Martin Garrix & DubVision", genre=Genre.ELECTRONIC),
-    Music(id=8, name="You", artist="Regard, Troye Sivan, Tate McRae", genre=Genre.ELECTRONIC),
-    Music(id=9, name="Titanium", artist="David Guetta feat. Sia", genre=Genre.ELECTRONIC),
-]
+app = FastAPI()
 
 #https://fastapi.tiangolo.com/tutorial/path-params/?h=pydant    
 @app.get('/music/{id}', response_model=Music)  
