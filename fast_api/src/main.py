@@ -3,8 +3,9 @@ from models import MusicForm, Music, Genre, MusicUpdate
 from sqlmodel import Session, select
 from exceptions.notfound import NotFoundException
 from config.database import create_db_and_tables, get_session
-# from contextlib import asynccontextmanager
 
+# Used to initialize database at the very begining of the program
+# As this API is using alembic (migrations) there is no need for that
 #https://fastapi.tiangolo.com/advanced/events/?h=life#lifespan
 # @asynccontextmanager
 # async def lifespan(app: FastAPI):
@@ -23,6 +24,7 @@ async def get_music_by_id(
     if(music == None): raise HTTPException(status_code=404)
     return music
 
+#https://fastapi.tiangolo.com/tutorial/query-params/?h=query
 @app.get('/music', response_model=list[Music])  
 async def get_musics(
     genre: Genre = Query(None, description="Filter by genre"), 
@@ -42,6 +44,7 @@ async def add_music(form: MusicForm, session: Session = Depends(get_session)):
     new_music = Music(**form.model_dump())
     session.add(new_music)
     session.commit()
+    # update music object with post changes (it receives the ID from the database)
     session.refresh(new_music)
     return new_music
 
@@ -56,15 +59,20 @@ async def update_music(
     if not music:
         raise NotFoundException()
 
+    # copy form fields as a dict to_data
     music_data = form.model_dump(exclude_unset=True)
+    # update the fields in the music object model
     music.sqlmodel_update(music_data)
+    # re add the music updated
     session.add(music)
+    # persist the changes in the database
     session.commit()
     session.refresh(music)
     return music
 
 @app.delete('/music/{id}')
 async def delete_music(
+    # inject a session dependency
     session: Session = Depends(get_session),
     id: int = Path(description="Unique identifier of the music to be removed"),
 ):
