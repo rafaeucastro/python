@@ -1,2 +1,3 @@
 # python
-Repositório para treinar conceitos da linguagem python
+
+Repository to practice the concepts of python language
