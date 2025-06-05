@@ -1,2 +1,4 @@
-/fast_api/venv
 *__pycache__
+*venv
+*.db
+db.sqlite

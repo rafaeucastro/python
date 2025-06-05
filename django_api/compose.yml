@@ -1,0 +1,9 @@
+services:
+  api:
+    #build from Dockerfile at "."
+    build: .
+    container_name: djangoapi
+    ports:
+      - "8005:8005"
+    volumes:
+      - .:/app
