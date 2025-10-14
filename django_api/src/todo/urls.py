@@ -17,7 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Here I can add the urls of my apps
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("myapp.urls"))
+    path("", include("myapp.urls")),
+    path("", include("asiatouragency.urls"))
 ]

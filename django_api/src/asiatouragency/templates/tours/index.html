@@ -1,0 +1,21 @@
+<!-- Load static files located inside my app root directory -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asia Tours</title>
+    <!-- Here I referece the static file I want to use -->
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+</head>
+<body>
+    <img src="{% static 'images/logo.png' %}" alt="Logo" >
+    <h1>Asia Tours Schedule for {{ year }}</h1>
+    <ul>
+        {% for tour in tours %}
+        <li>{{tour}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

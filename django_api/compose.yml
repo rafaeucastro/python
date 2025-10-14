@@ -1,9 +1,13 @@
 services:
   api:
-    #build from Dockerfile at "."
+    # Build from Dockerfile at "."
     build: .
-    container_name: djangoapi
+    container_name: djangoapp
+    # Binds the local port to the container port
     ports:
-      - "8005:8005"
+      - "8008:8008"
+    # Mounts the current directory into the /app from the container. Doing this I can modify the files from the local machine. Not recomended in production though!
     volumes:
       - .:/app
+    # Creates an user UID:GID
+    # user: "1000:1000"

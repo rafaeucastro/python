@@ -2,3 +2,4 @@
 *venv
 *.db
 db.sqlite
+django_api/.venv/*

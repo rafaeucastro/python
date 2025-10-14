@@ -16,4 +16,4 @@
 - `docker run -d --name djangoapi -p 8000:8000 djangoapi`
 
 #### Run services with docker-compose:
-- `docker compose up -d --build`
+- `docker compose up -d --build`   

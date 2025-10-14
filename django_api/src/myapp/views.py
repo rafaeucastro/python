@@ -5,6 +5,7 @@ from .models import TodoItem
 def home(request):
     return render(request, "base.html")
 
+# You can acess localhost:port/todos/ to get the html page.
 def todos(request):
     items = TodoItem.objects.all()
     return render(request, "todos.html", {"todos": items})
