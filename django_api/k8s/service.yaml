@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: djangoapp-service
+spec:
+  type: ClusterIP # Usado para acesso local
+  selector:
+    app: djangoapp
+  ports: 
+    - protocol: TCP
+      port: 8008 # Porta que o service "expõe" - Usuário acessa localhost:8008
+      targetPort: 8008 # Porta que o container escuta (definida lá no Pod)

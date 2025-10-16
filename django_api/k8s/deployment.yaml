@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeploy 
+  labels:
+    app: mydeploy # valor e chave personalizável, podendo ser aplicado para filtro.
+spec:
+  replicas: 3 # cria automaticamente o pod quando um cai ou é excluído
+  selector:
+    matchLabels: 
+      app: mydeploy
+  template:
+    metadata:
+      labels:
+        app: mydeploy
+    spec: 
+        containers: 
+         - name: djangoapp
+           image: nginx:stable-alpine3.21-perl #registry onde a imagem está armazenada
+           ports:
+             - containerPort: 8008
+           resources:
+             requests:
+               cpu: "200m"          # “200 millicores” como garantia mínima
+               memory: "256Mi"      # 256 MiB como garantia mínima
+             limits:
+               cpu: "500m"           # limite máximo de 500 millicores
+               memory: "512Mi"       # limite máximo de 512 MiB
