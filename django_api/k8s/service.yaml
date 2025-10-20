@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata: 
-  name: djangoapp-service
+  name: nginx-service
 spec:
-  type: ClusterIP # Usado para acesso local
+  # type: ClusterIP # Usado para acesso dentro do cluster, cria um IP estável e um nome DNS interno.
+  type: NodePort
   selector:
-    app: djangoapp
+    app: mydeploy
   ports: 
     - protocol: TCP
-      port: 8008 # Porta que o service "expõe" - Usuário acessa localhost:8008
-      targetPort: 8008 # Porta que o container escuta (definida lá no Pod)
+      port: 8008 # Porta que o Service vai expor internamente (ClusterIP)
+      targetPort: 80 # Porta que o container escuta (definida lá no Pod)
+      nodePort: 30080 # Porta que será exposta no nó

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mydeploy # valor e chave personalizável, podendo ser aplicado para filtro.
 spec:
-  replicas: 3 # cria automaticamente o pod quando um cai ou é excluído
+  #replicas: 3 # cria automaticamente o pod quando um cai ou é excluído
   selector:
     matchLabels: 
       app: mydeploy
@@ -15,10 +15,14 @@ spec:
         app: mydeploy
     spec: 
         containers: 
-         - name: djangoapp
-           image: nginx:stable-alpine3.21-perl #registry onde a imagem está armazenada
+         - name: nginx
+           image: nginx:stable-alpine3.21-perl # registry onde a imagem está armazenada
+           volumeMounts: # Indica volumes a serem montados
+            - name: myvolume
+              mountPath: /usr/share/nginx/html/ # local de montagem
+              readOnly: true
            ports:
-             - containerPort: 8008
+             - containerPort: 80
            resources:
              requests:
                cpu: "200m"          # “200 millicores” como garantia mínima
@@ -26,3 +30,7 @@ spec:
              limits:
                cpu: "500m"           # limite máximo de 500 millicores
                memory: "512Mi"       # limite máximo de 512 MiB
+        volumes: # cria volumes
+        - name: myvolume
+          configMap: # associa um configMap ao volume
+            name: myindex

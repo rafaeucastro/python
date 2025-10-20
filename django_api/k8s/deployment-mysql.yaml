@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydb
+  labels:
+    app: mydb # valor e chave personalizável, podendo ser aplicado para filtro.
+spec:
+  replicas: 1 # cria automaticamente o pod quando um cai ou é excluído
+  selector:
+    matchLabels: 
+      app: mydb
+  template:
+    metadata:
+      labels:
+        app: mydb
+    spec: 
+        containers: 
+         - name: mysql
+           image: mysql #registry onde a imagem está armazenada
+          #  env:
+          #   - name: MYSQL_ROOT_PASSWORD
+          #     value: admin
+           envFrom:
+           - secretRef:
+              name: mysecret
+           resources:
+             requests:
+               cpu: "200m"          # “200 millicores” como garantia mínima
+               memory: "256Mi"      # 256 MiB como garantia mínima
+             limits:
+               cpu: "500m"           # limite máximo de 500 millicores
+               memory: "512Mi"       # limite máximo de 512 MiB

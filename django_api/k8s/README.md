@@ -1,3 +1,13 @@
+Namespace: Isola recursos dentro do cluster, permitindo múltiplos ambientes ou equipes compartilhando o mesmo cluster.
+Pod: A menor unidade implantável do Kubernetes, que agrupa um ou mais containers compartilhando rede e armazenamento.
+Deployment: Gerencia a criação e atualização de réplicas de pods, garantindo disponibilidade e controle de versões.
+Service: expõe um pod ou deployment para o cluster ou Nó
+- ClusterIP
+- NodePort
+ConfigMap: Armazena dados de configuração em pares chave-valor para serem consumidos pelos pods.
+Secret: Semelhante ao ConfigMap, mas usado para armazenar dados sensíveis, como senhas e tokens.
+
+#### Comandos
 Detalhar manifesto
 comando: `kubectl explain deployment.metadata`
 
@@ -28,3 +38,16 @@ comando: `kubectl edit deployment mydeploy -o yaml`
 
 Aumentar réplicas de um deployment
 comando: `kubectl scale --replicas 5 deployment mydeploy`
+
+Verificar o log de um pod
+comando: `kubectl logs -f podname`
+
+Criar uma secret genérica para o mysql
+comando: `kubectl create secret generic mysecret --from-literal MYSQL_ROOT_PASSWORD=admin`
+
+Executar interativamente um pod
+comando: `kubectl exec -it podname -- bash`
+
+Criar um ConfigMap:
+comando: `kubectl create configmap myindex --from-file index.html`
+

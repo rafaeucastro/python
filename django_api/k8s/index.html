@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recursos Principais do Kubernetes</title>
+  <style>
+    /* Cor oficial azul Kubernetes */
+    :root {
+      --k8s-blue: #326ce5;
+      --k8s-blue-dark: #254ecf;
+      --white: #ffffff;
+      --light-blue: #dbe9ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--k8s-blue);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      background-color: var(--k8s-blue-dark);
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      padding: 30px 40px;
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background-color: var(--light-blue);
+      color: var(--k8s-blue-dark);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    li:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .resource-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .resource-desc {
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      li {
+        padding: 12px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Principais Recursos do Kubernetes</h1>
+    <ul>
+      <li>
+        <div class="resource-name">Pod</div>
+        <div class="resource-desc">A menor unidade implantável do Kubernetes, que agrupa um ou mais containers compartilhando rede e armazenamento.</div>
+      </li>
+      <li>
+        <div class="resource-name">Service</div>
+        <div class="resource-desc">Define uma forma de expor os pods como um serviço de rede estável dentro do cluster.</div>
+      </li>
+      <li>
+        <div class="resource-name">Deployment</div>
+        <div class="resource-desc">Gerencia a criação e atualização de réplicas de pods, garantindo disponibilidade e controle de versões.</div>
+      </li>
+      <li>
+        <div class="resource-name">ConfigMap</div>
+        <div class="resource-desc">Armazena dados de configuração em pares chave-valor para serem consumidos pelos pods.</div>
+      </li>
+      <li>
+        <div class="resource-name">Secret</div>
+        <div class="resource-desc">Semelhante ao ConfigMap, mas usado para armazenar dados sensíveis, como senhas e tokens.</div>
+      </li>
+      <li>
+        <div class="resource-name">Namespace</div>
+        <div class="resource-desc">Isola recursos dentro do cluster, permitindo múltiplos ambientes ou equipes compartilhando o mesmo cluster.</div>
+      </li>
+      <li>
+        <div class="resource-name">StatefulSet</div>
+        <div class="resource-desc">Gerencia aplicações com estado, garantindo identidades estáveis e armazenamento persistente para pods.</div>
+      </li>
+      <li>
+        <div class="resource-name">DaemonSet</div>
+        <div class="resource-desc">Garante que uma cópia específica de um pod esteja rodando em todos (ou alguns) nós do cluster.</div>
+      </li>
+      <li>
+        <div class="resource-name">Ingress</div>
+        <div class="resource-desc">Gerencia acesso externo aos serviços dentro do cluster, geralmente via HTTP/HTTPS.</div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
