@@ -6,6 +6,7 @@ Service: expõe um pod ou deployment para o cluster ou Nó
 - NodePort
 ConfigMap: Armazena dados de configuração em pares chave-valor para serem consumidos pelos pods.
 Secret: Semelhante ao ConfigMap, mas usado para armazenar dados sensíveis, como senhas e tokens.
+SecretStore: Uma fonte externa de secrets, ex: AWSSecretsManager, AzureKeyVault.
 
 #### Comandos
 Detalhar manifesto
@@ -51,3 +52,20 @@ comando: `kubectl exec -it podname -- bash`
 Criar um ConfigMap:
 comando: `kubectl create configmap myindex --from-file index.html`
 
+Conectar uma secret como env em um deployment e adicionar um prefixo a todas as chaves:
+comando `kubectl set env deployment/mydb --from secret/wordpress --prefix=MYSQL_`
+
+Verificar serviços:
+comando: `kubectl get svc`
+
+Verificar volumes:
+comando: `kubectl get pv`
+
+Verificar reivindicação de volumes:
+comando: `kubectl get pvc`
+
+Verificar endpoints:
+comando: `kubectl get endpoints`
+
+Fazer encaminhamento de porta para acesso localhost:
+comando: `kubectl port-forward svc/wordpress 8080:8080`

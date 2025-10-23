@@ -10,6 +10,9 @@ spec:
     image: 172.29.134.212:5000/djangoapp:latest #registry onde a imagem está armazenada
     ports:
       - containerPort: 8008
+    # volumeMounts:
+    #   - mountPath: /host
+    #     name: nfs-volume # associa o volume criado
     resources:
       requests:
         cpu: "200m"          # “200 millicores” como garantia mínima
@@ -17,3 +20,8 @@ spec:
       limits:
         cpu: "500m"           # limite máximo de 500 millicores
         memory: "512Mi"       # limite máximo de 512 MiB
+  # volumes: #
+  #   - name: nfs-volume
+  #     nfs: # cria um volume NFS
+  #       server: 192.168.0.197
+  #       path: /storage

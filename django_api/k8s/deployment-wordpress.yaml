@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress # valor e chave personalizável, podendo ser aplicado para filtro.
+spec:
+  replicas: 1 # cria automaticamente o pod quando um cai ou é excluído
+  selector:
+    matchLabels: 
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec: 
+        containers: 
+         - name: wordpress
+           image: wordpress # registry onde a imagem está armazenada
+           resources:
+             requests:
+               cpu: "200m"          # “200 millicores” como garantia mínima
+               memory: "256Mi"      # 256 MiB como garantia mínima
+             limits:
+               cpu: "500m"           # limite máximo de 500 millicores
+               memory: "512Mi"       # limite máximo de 512 MiB

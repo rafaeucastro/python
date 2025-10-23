@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mydeploy 
+  name: mydeploy # nome do Deployment
   labels:
     app: mydeploy # valor e chave personalizável, podendo ser aplicado para filtro.
 spec:
@@ -21,6 +21,8 @@ spec:
             - name: myvolume
               mountPath: /usr/share/nginx/html/ # local de montagem
               readOnly: true
+            - name: mypersistentvolume
+              mountPath: /persist
            ports:
              - containerPort: 80
            resources:
@@ -32,5 +34,8 @@ spec:
                memory: "512Mi"       # limite máximo de 512 MiB
         volumes: # cria volumes
         - name: myvolume
-          configMap: # associa um configMap ao volume
+          configMap: # associa um configMap existente ao volume
             name: myindex
+        - name: mypersistentvolume
+          persistentVolumeClaim: # associa um pvc existente
+            claimName: my-nfs-claim
