@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: simple-cron-job
+spec:
+  # schedule: "*/1 * * * *" # executar esse job a cada hora
+  schedule: "0 0 * * *" # executar esse job sempre meia noite
+  successfulJobsHistoryLimit: 3 # limite de registro
+  failedJobsHistoryLimit: 1 # limite de registro
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: job-container
+              image: busybox
+              command: ["sh", "-c", "echo Hello, Kubernetes! && sleep 10"]
+          restartPolicy: Never
